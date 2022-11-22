@@ -46,6 +46,8 @@ public class CustomerController implements CustomerApi {
         if(car == null) {
             throw new ResourceNotFoundException("Car with carId: "+carId+" not found in the system.");
         }
+        car.setAvailable(false);
+        carService.updateCar(car);
         Booking booking = bookingService.bookCar(userId, car, bookingRequest.getStartLocation(), bookingRequest.getEndLocation());
         return booking;
     }
@@ -62,6 +64,9 @@ public class CustomerController implements CustomerApi {
         if(booking.getUserId().compareTo(userId) != 0) {
             throw new InvalidOperationException("You are not allowed to cancel bookings of other users.");
         }
+        Car car = carService.findCarById(booking.getCarId());
+        car.setAvailable(true);
+        carService.updateCar(car);
         bookingService.cancelBooking(booking);
         return "Successfully cancelled the booking.";
     }

@@ -17,6 +17,8 @@ public interface CarService {
 
     void addCar(Car car);
 
+    void updateCar(Car car);
+
     void removeCar(Car car);
 
     void assignCarToDriver(Car car, Driver driver);
