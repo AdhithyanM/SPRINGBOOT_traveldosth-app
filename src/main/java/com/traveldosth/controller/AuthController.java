@@ -99,6 +99,7 @@ public class AuthController implements AuthApi {
                 break;
             case 1:         // DRIVER
                 role = RoleEnum.ROLE_DRIVER;
+		    isDriver.set(true);
 
                 break;
             default:        // any other roleId is considered as CUSTOMER
